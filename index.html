@@ -7,19 +7,19 @@
   <title>나고야 가족여행 | 2026.06.19 - 06.22</title>
   <style>
     :root {
-      --bg: #fff7ed;
-      --bg2: #fef3c7;
-      --card: rgba(255, 255, 255, .84);
+      --bg: #f8fafc;
+      --bg2: #eef2f7;
+      --card: rgba(255, 255, 255, .92);
       --text: #1f2937;
       --muted: #667085;
       --line: rgba(148, 163, 184, .35);
-      --accent: #e11d48;
-      --accent2: #f97316;
+      --accent: #334155;
+      --accent2: #64748b;
       --blue: #2563eb;
       --green: #059669;
       --danger: #dc2626;
-      --shadow: 0 20px 60px rgba(120, 53, 15, .14);
-      --radius: 24px;
+      --shadow: 0 10px 28px rgba(15, 23, 42, .08);
+      --radius: 18px;
     }
 
     [data-theme="night"] {
@@ -49,36 +49,21 @@
       margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at 10% 0%, rgba(251, 146, 60, .35), transparent 30%),
-        radial-gradient(circle at 90% 10%, rgba(244, 63, 94, .28), transparent 30%),
-        linear-gradient(135deg, var(--bg), var(--bg2));
+      background: linear-gradient(180deg, var(--bg), var(--bg2));
       min-height: 100vh;
-    }
-
-    body:before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, .18) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, .18) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: linear-gradient(to bottom, black, transparent 72%);
     }
 
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 34px 18px 26px;
+      padding: 20px 14px 12px;
     }
 
     .hero-inner {
       max-width: 1120px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: 1fr;
       gap: 18px;
       align-items: center;
     }
@@ -92,7 +77,7 @@
     }
 
     .hero-copy {
-      padding: 28px;
+      padding: 20px;
     }
 
     .eyebrow {
@@ -110,20 +95,20 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(34px, 6vw, 64px);
+      font-size: clamp(28px, 7vw, 42px);
       line-height: 1;
       letter-spacing: -0.05em;
     }
 
     .hero-copy p {
       color: var(--muted);
-      font-size: 17px;
-      line-height: 1.65;
-      margin: 16px 0 0;
+      font-size: 15px;
+      line-height: 1.55;
+      margin: 12px 0 0;
     }
 
     .hero-art {
-      min-height: 320px;
+      min-height: 190px;
       display: grid;
       place-items: center;
       padding: 18px;
@@ -133,7 +118,7 @@
 
     .hero-art svg {
       width: 100%;
-      max-width: 460px;
+      max-width: 300px;
       filter: drop-shadow(0 22px 28px rgba(120, 53, 15, .18));
     }
 
@@ -157,18 +142,11 @@
     main {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 0 18px 34px;
+      padding: 0 14px 28px;
     }
 
     .toolbar {
-      display: grid;
-      grid-template-columns: 1fr auto auto auto;
-      gap: 10px;
-      padding: 12px;
-      margin-bottom: 14px;
-      position: sticky;
-      top: 8px;
-      z-index: 5;
+      display: none;
     }
 
     input,
@@ -198,7 +176,7 @@
     button,
     .button {
       border: 0;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      background: #334155;
       color: white;
       padding: 12px 14px;
       border-radius: 14px;
@@ -210,7 +188,7 @@
       justify-content: center;
       gap: 7px;
       white-space: nowrap;
-      box-shadow: 0 10px 24px rgba(225, 29, 72, .18);
+      box-shadow: none;
     }
 
     button.secondary,
@@ -232,7 +210,7 @@
     }
 
     button.ok {
-      background: linear-gradient(135deg, #059669, #16a34a);
+      background: #0f766e;
     }
 
     button:disabled {
@@ -242,11 +220,11 @@
     }
 
     .form {
-      padding: 16px;
+      padding: 14px;
       display: grid;
-      grid-template-columns: 130px 120px 120px 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 18px;
+      grid-template-columns: 120px 110px 110px 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
     label {
@@ -263,8 +241,8 @@
 
     .days {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+      grid-template-columns: 1fr;
+      gap: 10px;
     }
 
     .day {
@@ -273,7 +251,7 @@
     }
 
     .day-head {
-      padding: 16px;
+      padding: 14px;
       border-bottom: 1px solid var(--line);
       display: flex;
       justify-content: space-between;
@@ -301,8 +279,8 @@
       position: relative;
       display: grid;
       grid-template-columns: 150px 1fr;
-      gap: 12px;
-      padding: 15px 16px;
+      gap: 10px;
+      padding: 12px 14px;
       border-bottom: 1px solid var(--line);
     }
 
@@ -315,15 +293,16 @@
       width: 136px;
       min-width: 136px;
       max-width: 136px;
-      border-radius: 16px;
-      padding: 10px 8px;
+      border-radius: 12px;
+      padding: 9px 8px;
       text-align: center;
-      font-weight: 1000;
-      color: white;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      font-weight: 800;
+      color: #334155;
+      background: #f1f5f9;
+      border: 1px solid rgba(148, 163, 184, .45);
       font-size: 13px;
       line-height: 1.2;
-      letter-spacing: .3px;
+      letter-spacing: .1px;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       white-space: nowrap;
       overflow: visible;
@@ -337,7 +316,7 @@
     }
 
     .title {
-      font-weight: 1000;
+      font-weight: 800;
       font-size: 16px;
       margin: 0 0 5px;
     }
@@ -371,7 +350,7 @@
 
     .tips {
       margin-top: 16px;
-      padding: 16px;
+      padding: 14px;
       color: var(--muted);
       line-height: 1.6;
       font-size: 14px;
@@ -407,6 +386,8 @@
     }
 
     @media (max-width: 860px) {
+      .hero-art { display: none; }
+
       .hero-inner {
         grid-template-columns: 1fr;
       }
@@ -488,11 +469,11 @@
       <div class="hero-copy glass">
         <div class="eyebrow">🍤 Nagoya Family Trip</div>
         <h1>나고야<br />3박 4일 여행</h1>
-        <p>처가 식구들과 함께 보는 일정표. 장소를 추가하고, 구글맵 주소나 검색어를 넣으면 바로 지도 버튼으로 연결됩니다.</p>
+        <p>가족과 함께 보는 일정표. 장소를 추가하고, 구글맵 주소나 검색어를 넣으면 바로 지도 버튼으로 연결됩니다.</p>
         <div class="chip-row">
           <span class="chip">2026.06.19 - 06.22</span>
           <span class="chip">나고야성 · 사카에 · 오스</span>
-          <span class="chip">GitHub Pages OK</span>
+          
         </div>
       </div>
 
@@ -581,10 +562,7 @@
     <section class="days" id="days"></section>
 
     <section class="tips glass">
-      <b>GitHub Pages 배포:</b> 이 폴더의 <code>index.html</code>을 repository 루트에 올린 뒤
-      <code>Settings → Pages → Deploy from a branch → main / root</code>로 설정하면 됩니다.
-      <br />
-      <b>중요:</b> 이 버전은 Google Sheets에 저장됩니다. 가족이 추가/삭제한 일정은 새로고침하거나 버튼 작업 후 모두에게 반영됩니다.
+      <b>안내:</b> 일정은 Google Sheets에 저장됩니다. 가족이 추가/수정한 내용은 새로고침 후 함께 확인할 수 있습니다.
     </section>
   </main>
 
