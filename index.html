@@ -570,7 +570,11 @@
 
     async function load() {
       const res = await fetch(API_URL);
-      return await res.json();
+      const data = await res.json();
+
+      return data.sort((a, b) =>
+        String(a.date + a.time).localeCompare(String(b.date + b.time))
+      );
     }
 
     async function addToServer(item) {
@@ -708,9 +712,10 @@
     }
     async function render() {
       const keyword = document.getElementById("search")?.value.trim().toLowerCase() || "";
+
       const items = (await load())
-        .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time))
         .filter(x => !keyword || [x.title, x.memo, x.map].join(" ").toLowerCase().includes(keyword));
+
       const root = document.getElementById("days");
       root.innerHTML = "";
       for (const [date, label] of DAYS) {
@@ -758,7 +763,10 @@
       return String(str).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
     }
     document.body.dataset.theme = localStorage.getItem(THEME_KEY) || "day";
-    render();
+    //render();
+    window.addEventListener("DOMContentLoaded", () => {
+      render();
+    });
   </script>
 </body>
 
