@@ -241,11 +241,19 @@
 
     .grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
+      align-items: start;
     }
 
-    .field.full {
+    .field {
+      min-width: 0;
+    }
+
+    .field.full,
+    .field.place,
+    .field.map,
+    .field.memo {
       grid-column: 1 / -1;
     }
 
@@ -258,6 +266,7 @@
     }
 
     input, select, textarea {
+      display: block;
       width: 100%;
       border: 1px solid var(--line);
       border-radius: 12px;
@@ -268,8 +277,9 @@
     }
 
     textarea {
-      min-height: 70px;
+      min-height: 84px;
       resize: vertical;
+      display: block;
     }
 
     input:focus, select:focus, textarea:focus {
@@ -528,6 +538,7 @@
         grid-template-columns: 1fr 1fr;
       }
 
+      .field:first-child,
       .field.place,
       .field.map,
       .field.memo {
