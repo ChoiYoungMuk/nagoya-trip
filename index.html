@@ -235,6 +235,12 @@
       background: linear-gradient(135deg, #059669, #16a34a);
     }
 
+    button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
     .form {
       padding: 16px;
       display: grid;
@@ -606,9 +612,10 @@
       setTimeout(() => el.classList.remove("show"), 1600);
     }
     function mapsUrl(value) {
-      if (!value) return "";
-      if (value.startsWith("http://") || value.startsWith("https://")) return value;
-      return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(value);
+      const text = String(value || "").trim();
+      if (!text) return "";
+      if (text.startsWith("http://") || text.startsWith("https://")) return text;
+      return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(text);
     }
     async function addItem() {
       const item = {
@@ -836,7 +843,11 @@
           for (const item of dayItems) {
             const div = document.createElement("div");
             div.className = "item";
-            const mapValue = item.map || item.title;
+            const mapValue = String(item.map || "").trim();
+            const mapActions = mapValue
+              ? `<a class="button ghost" target="_blank" rel="noopener" href="${mapsUrl(mapValue)}">🗺️ 지도</a>
+                 <button class="ghost" onclick="copyMap('${escapeAttr(mapValue)}')">링크 복사</button>`
+              : `<button class="ghost" disabled title="Google Maps 주소가 없습니다.">지도 없음</button>`;
             div.innerHTML = `
           <div class="time-pill">${escapeHtml(item.time || "--:--")}</div>
           <div>
@@ -845,8 +856,7 @@
             </div>
             <div class="meta">${escapeHtml(item.memo || "메모 없음")}</div>
             <div class="actions">
-              <a class="button ghost" target="_blank" rel="noopener" href="${mapsUrl(mapValue)}">🗺️ 지도</a>
-              <button class="ghost" onclick="copyMap('${escapeAttr(mapValue)}')">링크 복사</button>
+              ${mapActions}
               <button class="secondary" onclick="editItem('${item.id}')">수정</button>
               <button class="danger" onclick="deleteItem('${item.id}')">삭제</button>
             </div>
