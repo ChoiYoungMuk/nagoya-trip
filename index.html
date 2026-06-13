@@ -1,328 +1,329 @@
 <!doctype html>
 <html lang="ko">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>나고야 가족여행 | 2026.06.19 - 06.22</title>
   <style>
     :root {
-      --bg: #f4f6f8;
-      --bg2: #ffffff;
+      --bg: #f6f7f9;
       --card: #ffffff;
       --text: #111827;
       --muted: #6b7280;
+      --soft: #f3f4f6;
       --line: #e5e7eb;
-      --accent: #bdd600;
-      --accent2: #9bc700;
-      --blue: #172a55;
-      --green: #bdd600;
+      --accent: #2563eb;
+      --accent-soft: #eff6ff;
       --danger: #ef4444;
-      --shadow: 0 8px 24px rgba(17, 24, 39, .08);
-      --radius: 16px;
+      --shadow: 0 8px 24px rgba(17, 24, 39, .06);
+      --radius: 18px;
     }
 
-    [data-theme="night"] {
-      --bg: #0f172a;
-      --bg2: #1e1b4b;
-      --card: rgba(15, 23, 42, .78);
-      --text: #f8fafc;
-      --muted: #cbd5e1;
-      --line: rgba(148, 163, 184, .25);
-      --accent: #fb7185;
-      --accent2: #fbbf24;
-      --blue: #60a5fa;
-      --green: #34d399;
-      --danger: #f87171;
-      --shadow: 0 20px 70px rgba(0, 0, 0, .34);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       background: var(--bg);
-      min-height: 100vh;
+      color: var(--text);
     }
 
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 0 14px 18px;
-      background: linear-gradient(180deg, #ffffff 0%, #ffffff 50%, #172a55 50%, #172a55 100%);
-      border-bottom: 1px solid #e5e7eb;
+    button, input, select, textarea {
+      font: inherit;
     }
 
-    .hero-inner {
-      max-width: 1040px;
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    .app {
+      width: min(920px, 100%);
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      align-items: center;
-      padding-top: 18px;
+      padding: 14px 14px 32px;
     }
 
-    .glass {
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin: -14px -14px 12px;
+      padding: 14px;
+      background: rgba(246, 247, 249, .92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(229, 231, 235, .8);
+    }
+
+    .topbar-inner {
+      width: min(920px, 100%);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+    }
+
+    .brand p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .sync {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    .panel {
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
 
-    .hero-copy {
-      padding: 22px 22px 20px;
-      border-top: 5px solid var(--accent);
+    .intro {
+      padding: 18px;
+      margin-bottom: 12px;
     }
 
-    .eyebrow {
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: #eef7c6;
-      color: #4b5f00;
-      font-weight: 800;
-      font-size: 12px;
-      margin-bottom: 14px;
-      letter-spacing: .02em;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(30px, 6vw, 46px);
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-    }
-
-    .hero-copy p {
-      color: var(--muted);
-      font-size: 17px;
-      line-height: 1.65;
-      margin: 16px 0 0;
-    }
-
-    .hero-art {
-      display: none;
-    }
-
-    .hero-art svg {
-      width: 100%;
-      max-width: 460px;
-      filter: drop-shadow(0 22px 28px rgba(120, 53, 15, .18));
-    }
-
-    .chip-row {
+    .intro-title {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 18px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
     }
 
-    .chip {
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, .5);
+    .intro-title strong {
+      font-size: 17px;
+      letter-spacing: -0.03em;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 9px;
       border-radius: 999px;
-      padding: 8px 11px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .intro p {
+      margin: 0;
       color: var(--muted);
-      font-weight: 700;
-      font-size: 13px;
+      line-height: 1.55;
+      font-size: 14px;
     }
 
-    main {
-      max-width: 1040px;
-      margin: 0 auto;
-      padding: 18px 14px 34px;
+
+    .add-toggle {
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 13px 14px;
+      border-radius: 14px;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 900;
+      box-shadow: var(--shadow);
     }
 
-    .toolbar {
+    .form.collapsed {
       display: none;
     }
 
-    input,
-    select,
-    textarea {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 12px 12px;
-      font: inherit;
-      background: #ffffff;
-      color: #111827;
-      outline: none;
-    }
-
-    textarea {
-      resize: vertical;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: #bdd600;
-      box-shadow: 0 0 0 3px rgba(189, 214, 0, .18);
-    }
-
-    button,
-    .button {
-      border: 0;
-      background: #172a55;
-      color: white;
-      padding: 12px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 800;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      white-space: nowrap;
-      box-shadow: none;
-    }
-
-    button.secondary,
-    .button.secondary {
-      background: #475467;
-      box-shadow: none;
-    }
-
-    button.ghost,
-    .button.ghost {
-      background: #eef2f7;
-      color: #172a55;
-      box-shadow: none;
-    }
-
-    button.danger {
-      background: var(--danger);
-      box-shadow: none;
-    }
-
-    button.ok {
-      background: #bdd600; color: #172a55;
-    }
-
-    button:disabled {
-      opacity: .45;
-      cursor: not-allowed;
-      box-shadow: none;
+    .close-form {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
     }
 
     .form {
-      padding: 16px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .form-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .form-head h2 {
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: -0.03em;
+    }
+
+    .grid {
       display: grid;
-      grid-template-columns: 130px 120px 120px 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 10px;
-      margin-bottom: 14px;
-      border-top: 5px solid #172a55;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
     }
 
     label {
       display: block;
-      font-size: 12px;
-      color: #172a55;
-      font-weight: 800;
       margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
     }
 
-    .full {
-      grid-column: 1 / -1;
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      padding: 11px 12px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, .10);
+    }
+
+    .primary {
+      width: 100%;
+      margin-top: 12px;
+      padding: 13px 14px;
+      border-radius: 13px;
+      background: var(--accent);
+      color: white;
+      font-weight: 900;
     }
 
     .days {
       display: grid;
-      grid-template-columns: 1fr;
       gap: 10px;
     }
 
     .day {
       overflow: hidden;
-      min-height: 240px;
     }
 
-    .day-head {
-      padding: 13px 16px;
-      border-bottom: 1px solid var(--line);
+    .day-summary {
+      width: 100%;
       display: flex;
-      justify-content: space-between;
-      gap: 10px;
       align-items: center;
-      background: #ffffff;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--card);
+      color: var(--text);
+      text-align: left;
     }
 
-    .day h2 {
-      margin: 0;
-      font-size: 17px;
-      letter-spacing: -.02em;
-      color: #172a55;
+    .day-summary-left {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
     }
 
-    .count {
+    .day-title {
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .day-sub {
+      color: var(--muted);
       font-size: 12px;
-      color: #4b5f00;
-      font-weight: 800;
-      background: #eef7c6;
-      border-radius: 999px;
-      padding: 5px 9px;
+      font-weight: 700;
+    }
+
+    .chevron {
+      color: var(--muted);
+      font-weight: 900;
+      transition: transform .2s ease;
+    }
+
+    .day[data-open="true"] .chevron {
+      transform: rotate(90deg);
+    }
+
+    .items {
+      display: none;
+      padding: 0 12px 12px;
+      background: var(--card);
+    }
+
+    .day[data-open="true"] .items {
+      display: block;
     }
 
     .item {
-      position: relative;
       display: grid;
-      grid-template-columns: 132px 1fr;
-      gap: 10px;
-      padding: 13px 16px;
-      border-bottom: 1px solid var(--line);
+      grid-template-columns: 118px 1fr;
+      gap: 12px;
+      padding: 13px 0;
+      border-top: 1px solid var(--line);
     }
 
-    .item:last-child {
-      border-bottom: 0;
-    }
-
-    .time-pill {
+    .time {
       align-self: start;
-      width: 118px;
-      min-width: 118px;
-      max-width: 118px;
-      border-radius: 8px;
-      padding: 9px 7px;
-      text-align: center;
-      font-weight: 800;
-      color: #172a55;
-      background: #eef7c6;
-      border: 1px solid #d7e889;
+      display: inline-flex;
+      justify-content: center;
+      width: 112px;
+      padding: 8px 7px;
+      border-radius: 12px;
+      background: var(--soft);
+      color: #374151;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: 12px;
-      line-height: 1.2;
-      letter-spacing: .1px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      white-space: nowrap;
-      overflow: visible;
-    }
-
-    .title-row {
-      display: flex;
-      align-items: start;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .title {
       font-weight: 800;
-      font-size: 16px;
-      margin: 0 0 5px;
+      white-space: nowrap;
     }
 
-    .meta {
+    .item-title {
+      margin: 0 0 4px;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .memo {
+      margin: 0;
       color: var(--muted);
       font-size: 14px;
       line-height: 1.45;
@@ -333,52 +334,61 @@
       display: flex;
       flex-wrap: wrap;
       gap: 7px;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
-    .actions button,
-    .actions .button {
+    .action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
       padding: 8px 10px;
-      border-radius: 11px;
+      border-radius: 10px;
+      background: var(--soft);
+      color: #374151;
       font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .action.map {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .action.delete {
+      background: #fef2f2;
+      color: var(--danger);
+    }
+
+    .action:disabled {
+      opacity: .45;
+      cursor: not-allowed;
     }
 
     .empty {
-      padding: 18px;
+      padding: 14px 4px 2px;
       color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .tips {
-      margin-top: 16px;
-      padding: 16px;
-      color: var(--muted);
-      line-height: 1.6;
       font-size: 14px;
-    }
-
-    code {
-      background: rgba(148, 163, 184, .18);
-      padding: 2px 6px;
-      border-radius: 7px;
-      color: var(--text);
+      border-top: 1px solid var(--line);
     }
 
     .toast {
       position: fixed;
       left: 50%;
-      bottom: 22px;
-      transform: translateX(-50%) translateY(20px);
+      bottom: 20px;
+      transform: translateX(-50%) translateY(18px);
       opacity: 0;
       pointer-events: none;
-      transition: .25s ease;
+      transition: .22s ease;
       background: #111827;
-      color: white;
-      padding: 12px 14px;
+      color: #fff;
+      padding: 11px 14px;
       border-radius: 999px;
-      box-shadow: 0 14px 30px rgba(0, 0, 0, .2);
-      z-index: 10;
+      font-size: 13px;
       font-weight: 800;
+      z-index: 99;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .18);
     }
 
     .toast.show {
@@ -386,260 +396,195 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    @media (max-width: 860px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
+    @media (max-width: 640px) {
+      .app {
+        padding: 12px 10px 28px;
       }
 
-      .hero-art {
-        display: none;
+      .topbar {
+        margin: -12px -10px 10px;
+        padding: 12px 10px;
       }
 
-      .form {
+      .brand h1 {
+        font-size: 20px;
+      }
+
+      .sync {
+        padding: 7px 9px;
+      }
+
+      .intro {
+        padding: 15px;
+      }
+
+      .grid {
         grid-template-columns: 1fr 1fr;
       }
 
-      .days {
-        grid-template-columns: 1fr;
-      }
-    }
-
-      .hero-art {
-        min-height: 250px;
-      }
-
-      .toolbar {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .toolbar input {
-        grid-column: 1 / -1;
-      }
-
-      .form {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .days {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .hero {
-        padding: 0 10px 14px;
-      }
-
-      .hero-copy {
-        padding: 18px 16px;
-      }
-
-      .form {
-        grid-template-columns: 1fr 1fr;
-        padding: 12px;
-      }
-
-      .full {
+      .field.place,
+      .field.map,
+      .field.memo {
         grid-column: 1 / -1;
       }
 
       .item {
-        grid-template-columns: 112px 1fr;
-        padding: 12px;
-      }
-
-      .time-pill {
-        width: 100px;
-        min-width: 100px;
-        max-width: 100px;
-        font-size: 11px;
-        padding: 8px 6px;
-      }
-
-      .actions button,
-      .actions .button {
-        width: auto;
-      }
-
-      button,
-      .button {
-        width: 100%;
-      }
-    }
-
-      .hero-copy {
-        padding: 20px;
-      }
-
-      .toolbar {
-        position: static;
-      }
-
-      .form {
         grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 12px 0;
       }
 
-      .item {
-        grid-template-columns: 132px 1fr;
-        padding: 14px;
-      }
-
-      button,
-      .button {
-        width: 100%;
-      }
-
-      .actions button,
-      .actions .button {
+      .time {
         width: auto;
+        justify-content: flex-start;
+        padding: 7px 9px;
+      }
+
+      .actions {
+        gap: 6px;
+      }
+
+      .action {
+        min-height: 32px;
+        padding: 7px 9px;
       }
     }
-
-    @media (max-width: 380px) {
-      .item {
-        grid-template-columns: 104px 1fr;
-      }
-
-      .time-pill {
-        width: 94px;
-        min-width: 94px;
-        max-width: 94px;
-        font-size: 10px;
-      }
-    }
-
-      .time-pill {
-        width: 124px;
-        min-width: 124px;
-        max-width: 124px;
-        font-size: 13px;
-        padding: 10px 6px;
-      }
-    }
-
   </style>
 </head>
 
-<body data-theme="day">
-  <section class="hero">
-    <div style="max-width:1040px;margin:0 auto;padding:12px 2px 8px;display:flex;align-items:center;justify-content:space-between;color:#172a55;font-weight:900;">
-      <div style="display:flex;align-items:center;gap:8px;"><span style="width:18px;height:18px;border-radius:50%;background:#bdd600;display:inline-block;"></span> 나고야 가족여행</div>
-      <div style="font-size:12px;color:#6b7280;font-weight:800;">2026.06.19 - 06.22</div>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <h1>나고야 가족여행</h1>
+        <p>2026.06.19 ~ 06.22</p>
+      </div>
+      <div class="sync"><span class="dot"></span><span id="syncText">동기화</span></div>
     </div>
-    <div class="hero-inner">
-      <div class="hero-copy glass">
-        <div class="eyebrow">Nagoya Family Trip</div>
-        <h1>나고야<br />가족여행</h1>
-        <p>가족과 함께 보는 일정표. 장소를 추가하고, 구글맵 주소나 검색어를 넣으면 바로 지도 버튼으로 연결됩니다.</p>
-        <div class="chip-row">
-          <span class="chip">2026.06.19 - 06.22</span>
-          <span class="chip">나고야성 · 사카에 · 오스</span>
-          
+  </div>
+
+  <main class="app">
+    <section class="intro panel">
+      <div class="intro-title">
+        <strong>여행 일정표</strong>
+        <span class="badge">3박 4일</span>
+      </div>
+      <p>가족과 함께 보는 일정표입니다. 장소를 추가하고, 구글맵 주소나 검색어를 넣으면 지도 버튼으로 연결됩니다.</p>
+    </section>
+
+    <button class="add-toggle" id="addToggle" onclick="toggleForm()">＋ 일정 추가</button>
+
+    <section class="form panel collapsed" id="addForm">
+      <div class="form-head">
+        <h2>일정 추가</h2>
+        <button class="close-form" onclick="toggleForm(false)" type="button">닫기</button>
+      </div>
+
+      <div class="grid">
+        <div class="field">
+          <label for="date">날짜</label>
+          <select id="date">
+            <option value="2026-06-19">6/19 금</option>
+            <option value="2026-06-20">6/20 토</option>
+            <option value="2026-06-21">6/21 일</option>
+            <option value="2026-06-22">6/22 월</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="time">시작</label>
+          <input id="time" type="time" value="10:00" step="60" />
+        </div>
+
+        <div class="field">
+          <label for="endTime">종료</label>
+          <input id="endTime" type="time" step="60" />
+        </div>
+
+        <div class="field place">
+          <label for="title">장소/일정명</label>
+          <input id="title" placeholder="예: 나고야성" />
+        </div>
+
+        <div class="field map">
+          <label for="map">Google Maps 주소 또는 검색어</label>
+          <input id="map" placeholder="선택 입력" />
+        </div>
+
+        <div class="field memo">
+          <label for="memo">메모</label>
+          <textarea id="memo" placeholder="예약번호, 이동수단, 식사 후보 등을 적어두세요."></textarea>
         </div>
       </div>
 
-      <div class="hero-art glass" aria-label="나고야 일러스트">
-        <svg viewBox="0 0 600 420" role="img">
-          <defs>
-            <linearGradient id="sun" x1="0" x2="1">
-              <stop offset="0" stop-color="#fb7185" />
-              <stop offset="1" stop-color="#f59e0b" />
-            </linearGradient>
-            <linearGradient id="castle" x1="0" x2="1">
-              <stop offset="0" stop-color="#0f766e" />
-              <stop offset="1" stop-color="#14b8a6" />
-            </linearGradient>
-          </defs>
-          <circle cx="455" cy="92" r="64" fill="url(#sun)" opacity=".9" />
-          <path d="M40 337 C120 292 190 320 252 284 C332 238 396 278 560 220 L560 420 L40 420 Z" fill="#fde68a"
-            opacity=".8" />
-          <path d="M85 338 L515 338 L540 382 L60 382 Z" fill="#78350f" opacity=".85" />
-          <path d="M156 294 L444 294 L418 338 L182 338 Z" fill="#92400e" />
-          <path d="M190 250 L410 250 L382 294 L218 294 Z" fill="#a16207" />
-          <path d="M224 205 L376 205 L348 250 L252 250 Z" fill="#b45309" />
-          <path d="M238 175 L362 175 L376 205 L224 205 Z" fill="url(#castle)" />
-          <path d="M203 224 L397 224 L410 250 L190 250 Z" fill="url(#castle)" />
-          <path d="M168 268 L432 268 L444 294 L156 294 Z" fill="url(#castle)" />
-          <rect x="282" y="142" width="36" height="36" rx="4" fill="#fef3c7" />
-          <path d="M278 142 L300 118 L322 142 Z" fill="#f97316" />
-          <path d="M110 160 L125 160 L125 338 L110 338 Z" fill="#475569" />
-          <path d="M98 160 L137 160 L128 124 L107 124 Z" fill="#ef4444" />
-          <path d="M480 120 L493 120 L493 338 L480 338 Z" fill="#475569" />
-          <path d="M465 120 L508 120 L500 72 L473 72 Z" fill="#ef4444" />
-          <text x="60" y="82" fill="#7c2d12" font-size="34" font-weight="900">Nagoya</text>
-          <text x="60" y="118" fill="#9a3412" font-size="18" font-weight="700">miso katsu · hitsumabushi · castle
-            walk</text>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <main>
-    <section class="toolbar glass">
-      <input id="search" placeholder="일정 검색: 나고야성, 맛집, 쇼핑..." oninput="renderFromCache()" />
-      <button onclick="toggleTheme()">🌙 테마</button>
-      <button class="ghost" onclick="exportJson()">백업</button>
-      <label class="button secondary" for="importFile">불러오기</label>
-      <input id="importFile" type="file" accept="application/json" style="display:none" onchange="importJson(event)" />
-    </section>
-
-    <section class="form glass">
-      <div>
-        <label>날짜</label>
-        <select id="date">
-          <option value="2026-06-19">6/19 금</option>
-          <option value="2026-06-20">6/20 토</option>
-          <option value="2026-06-21">6/21 일</option>
-          <option value="2026-06-22">6/22 월</option>
-        </select>
-      </div>
-      <div>
-        <label>시작시간</label>
-        <input id="time" type="time" value="10:00" step="60" />
-      </div>
-      <div>
-        <label>종료시간</label>
-        <input id="endTime" type="time" step="60" />
-      </div>
-      <div>
-        <label>장소/일정명</label>
-        <input id="title" placeholder="예: 나고야성" />
-      </div>
-      <div>
-        <label>Google Maps 주소 또는 검색어</label>
-        <input id="map" placeholder="예: Nagoya Castle 또는 구글맵 URL" />
-      </div>
-      <div class="full">
-        <label>메모</label>
-        <textarea id="memo" rows="2" placeholder="예약번호, 이동수단, 식사 후보 등을 적어두세요."></textarea>
-      </div>
-      <div class="full" style="display:flex; gap:10px; flex-wrap:wrap;">
-        <button class="ok" onclick="addItem()">＋ 일정 추가</button>
-      </div>
+      <button class="primary" onclick="addItem()">＋ 일정 추가</button>
     </section>
 
     <section class="days" id="days"></section>
-
-    <section class="tips glass">
-      <b>안내:</b> 일정은 Google Sheets에 저장됩니다. 가족이 추가/수정한 내용은 새로고침 후 함께 확인할 수 있습니다.
-    </section>
   </main>
 
   <div id="toast" class="toast"></div>
 
   <script>
-    const KEY = "nagoya-family-trip-2026-v2";
     const API_URL = "https://script.google.com/macros/s/AKfycby0FcDhO69qMok8RCC3UBhCf_q-x5AnjVFkRpEXmsdVvdWAgAcO2sijj36KEx9Gnj90/exec";
-    const THEME_KEY = "nagoya-theme";
     const DAYS = [
-      ["2026-06-19", "6/19 금요일 · 1일차"],
-      ["2026-06-20", "6/20 토요일 · 2일차"],
-      ["2026-06-21", "6/21 일요일 · 3일차"],
-      ["2026-06-22", "6/22 월요일 · 4일차"]
+      ["2026-06-19", "6/19 금요일", "1일차"],
+      ["2026-06-20", "6/20 토요일", "2일차"],
+      ["2026-06-21", "6/21 일요일", "3일차"],
+      ["2026-06-22", "6/22 월요일", "4일차"]
     ];
 
     let cachedItems = [];
     let isFirstLoad = true;
+
+    function setSync(text, ok = true) {
+      const sync = document.getElementById("syncText");
+      const dot = document.querySelector(".dot");
+      if (sync) sync.textContent = text;
+      if (dot) dot.style.background = ok ? "#22c55e" : "#f59e0b";
+    }
+
+    function toast(message) {
+      const el = document.getElementById("toast");
+      el.textContent = message;
+      el.classList.add("show");
+      setTimeout(() => el.classList.remove("show"), 1600);
+    }
+
+    function sortItems(items) {
+      return items.sort((a, b) =>
+        String((a.date || "") + (a.time || "")).localeCompare(String((b.date || "") + (b.time || "")))
+      );
+    }
+
+    async function load() {
+      setSync("불러오는 중", false);
+      const res = await fetch(API_URL, { cache: "no-store" });
+      const data = await res.json();
+      cachedItems = sortItems(data.map(normalizeItem));
+      isFirstLoad = false;
+      setSync("동기화됨", true);
+      return cachedItems;
+    }
+
+    function normalizeItem(item) {
+      return {
+        id: String(item.id || ""),
+        date: String(item.date || ""),
+        time: normalizeTime(item.time),
+        endTime: normalizeTime(item.endTime || ""),
+        title: String(item.title || ""),
+        map: String(item.map || ""),
+        memo: String(item.memo || "")
+      };
+    }
+
+    function normalizeTime(value) {
+      const text = String(value || "");
+      const match = text.match(/(\d{1,2}):(\d{2})/);
+      if (match) return match[1].padStart(2, "0") + ":" + match[2];
+      return text.slice(0, 5);
+    }
 
     function displayTimeRange(item) {
       const start = item.time || "--:--";
@@ -647,22 +592,11 @@
       return end ? `${start} ~ ${end}` : start;
     }
 
-    async function load() {
-      const res = await fetch(API_URL, { cache: "no-store" });
-      const data = await res.json();
-
-      cachedItems = data.sort((a, b) =>
-        String(a.date + a.time).localeCompare(String(b.date + b.time))
-      );
-
-      isFirstLoad = false;
-      return cachedItems;
-    }
-
-    function sortItems(items) {
-      return items.sort((a, b) =>
-        String(a.date + a.time).localeCompare(String(b.date + b.time))
-      );
+    function mapsUrl(value) {
+      const text = String(value || "").trim();
+      if (!text) return "";
+      if (text.startsWith("http://") || text.startsWith("https://")) return text;
+      return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(text);
     }
 
     async function addToServer(item) {
@@ -671,22 +605,7 @@
         body: JSON.stringify(item)
       });
     }
-    // function save(items) {
-    //   localStorage.setItem(KEY, JSON.stringify(items));
-    //   render();
-    // }
-    function toast(message) {
-      const el = document.getElementById("toast");
-      el.textContent = message;
-      el.classList.add("show");
-      setTimeout(() => el.classList.remove("show"), 1600);
-    }
-    function mapsUrl(value) {
-      const text = String(value || "").trim();
-      if (!text) return "";
-      if (text.startsWith("http://") || text.startsWith("https://")) return text;
-      return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(text);
-    }
+
     async function addItem() {
       const item = {
         id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
@@ -697,6 +616,7 @@
         map: document.getElementById("map").value.trim(),
         memo: document.getElementById("memo").value.trim()
       };
+
       if (!item.title) {
         toast("장소/일정명을 입력해주세요.");
         return;
@@ -706,10 +626,7 @@
         toast("종료시간은 시작시간보다 늦게 선택해주세요.");
         return;
       }
-      // const items = load();
-      // items.push(item);
-      // items.sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
-      // save(items);
+
       cachedItems.push(item);
       sortItems(cachedItems);
       renderFromCache();
@@ -718,61 +635,53 @@
       document.getElementById("title").value = "";
       document.getElementById("map").value = "";
       document.getElementById("memo").value = "";
+
       toast("일정을 추가했어요. 동기화 중...");
+      setSync("저장 중", false);
 
       try {
         await addToServer(item);
         await load();
         renderFromCache();
-        toast("Google Sheets에 저장됐어요.");
+        toggleForm(false);
+        toast("저장됐어요.");
       } catch (error) {
         cachedItems = cachedItems.filter(x => String(x.id) !== String(item.id));
         renderFromCache();
-        toast("저장 실패. 잠시 후 다시 시도해주세요.");
+        setSync("동기화 확인 필요", false);
+        toast("저장 실패. 다시 시도해주세요.");
       }
     }
+
     async function deleteItem(id) {
       if (!confirm("이 일정을 삭제할까요?")) return;
 
       const before = [...cachedItems];
       cachedItems = cachedItems.filter(x => String(x.id) !== String(id));
       renderFromCache();
+
       toast("삭제했어요. 동기화 중...");
+      setSync("삭제 중", false);
 
       try {
         await fetch(API_URL, {
           method: "POST",
-          body: JSON.stringify({
-            action: "delete",
-            id
-          })
+          body: JSON.stringify({ action: "delete", id })
         });
 
         await load();
         renderFromCache();
-        toast("Google Sheets에 반영됐어요.");
+        toast("반영됐어요.");
       } catch (error) {
         cachedItems = before;
         renderFromCache();
-        toast("삭제 실패. 잠시 후 다시 시도해주세요.");
-      }
-    }
-
-    async function deleteAllFromServer() {
-      const items = await load();
-      for (const item of items) {
-        await fetch(API_URL, {
-          method: "POST",
-          body: JSON.stringify({
-            action: "delete",
-            id: item.id
-          })
-        });
+        setSync("동기화 확인 필요", false);
+        toast("삭제 실패. 다시 시도해주세요.");
       }
     }
 
     async function editItem(id) {
-      const items = await load();
+      const items = cachedItems.length ? cachedItems : await load();
       const item = items.find(x => String(x.id) === String(id));
       if (!item) return;
 
@@ -787,171 +696,144 @@
       cachedItems = cachedItems.filter(x => String(x.id) !== String(id));
       renderFromCache();
 
+      setSync("수정 준비 중", false);
+
       try {
         await fetch(API_URL, {
           method: "POST",
-          body: JSON.stringify({
-            action: "delete",
-            id
-          })
+          body: JSON.stringify({ action: "delete", id })
         });
+
         await load();
         renderFromCache();
+        toggleForm(true);
+        document.getElementById("addForm").scrollIntoView({ behavior: "smooth", block: "start" });
+        toast("내용 수정 후 다시 추가하세요.");
       } catch (error) {
         cachedItems = before;
         renderFromCache();
+        setSync("동기화 확인 필요", false);
         toast("수정 준비 실패. 다시 시도해주세요.");
+      }
+    }
+
+    function copyMap(value) {
+      const url = mapsUrl(value);
+      if (!url) {
+        toast("지도 주소가 없습니다.");
         return;
       }
-
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      toast("위 입력창에서 수정 후 다시 추가하세요.");
+      navigator.clipboard.writeText(url).then(() => toast("지도 링크를 복사했어요."));
     }
-    function copyMap(value) {
-      navigator.clipboard.writeText(mapsUrl(value)).then(() => toast("지도 링크를 복사했어요."));
-    }
-    async function exportJson() {
-      const items = await load();
-      const blob = new Blob([JSON.stringify(items, null, 2)], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "nagoya-trip-backup.json";
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-    function importJson(event) {
-      const file = event.target.files[0];
-      if (!file) return;
 
-      const reader = new FileReader();
-      reader.onload = async () => {
-        try {
-          const data = JSON.parse(reader.result);
-          if (!Array.isArray(data)) throw new Error("not array");
+    function toggleForm(force) {
+      const form = document.getElementById("addForm");
+      const button = document.getElementById("addToggle");
+      if (!form || !button) return;
 
-          if (!confirm("현재 스프레드시트 일정을 지우고 백업 파일로 교체할까요?")) return;
+      const shouldOpen = typeof force === "boolean"
+        ? force
+        : form.classList.contains("collapsed");
 
-          await deleteAllFromServer();
-          for (const item of data) {
-            await addToServer({
-              id: item.id || (crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random())),
-              date: item.date || "",
-              time: item.time || "",
-              endTime: item.endTime || "",
-              title: item.title || "",
-              map: item.map || "",
-              memo: item.memo || ""
-            });
-          }
+      form.classList.toggle("collapsed", !shouldOpen);
+      button.style.display = shouldOpen ? "none" : "block";
 
-          await load();
-          renderFromCache();
-          toast("백업을 불러왔어요.");
-        } catch {
-          toast("JSON 파일 형식이 올바르지 않습니다.");
-        }
-      };
-      reader.readAsText(file);
-    }
-    async function seedSample() {
-      const sample = [
-        { id: "s1", date: "2026-06-19", time: "11:00", endTime: "", title: "중부국제공항 도착", map: "Chubu Centrair International Airport", memo: "입국 후 교통패스/유심 확인" },
-        { id: "s2", date: "2026-06-19", time: "14:00", endTime: "", title: "나고야역 근처 호텔 체크인", map: "Nagoya Station", memo: "짐 맡기고 늦은 점심" },
-        { id: "s3", date: "2026-06-19", time: "18:00", endTime: "", title: "사카에 야경 산책", map: "Sakae Nagoya", memo: "오아시스21 / TV타워 근처" },
-        { id: "s4", date: "2026-06-20", time: "10:00", endTime: "", title: "나고야성", map: "Nagoya Castle", memo: "가족사진 포인트" },
-        { id: "s5", date: "2026-06-20", time: "13:00", endTime: "", title: "히츠마부시 점심", map: "hitsumabushi Nagoya", memo: "대기 고려" },
-        { id: "s6", date: "2026-06-21", time: "10:30", endTime: "", title: "오스 상점가", map: "Osu Shopping District Nagoya", memo: "간식/쇼핑" },
-        { id: "s7", date: "2026-06-21", time: "15:00", endTime: "", title: "도요타 산업기술기념관", map: "Toyota Commemorative Museum of Industry and Technology", memo: "어른들도 보기 좋음" },
-        { id: "s8", date: "2026-06-22", time: "09:30", endTime: "", title: "체크아웃 및 공항 이동", map: "Chubu Centrair International Airport", memo: "여권/보조배터리/면세 확인" }      ];
-
-      for (const item of sample) {
-        await addToServer({
-          ...item,
-          id: item.id + "-" + Date.now()
-        });
+      if (shouldOpen) {
+        setTimeout(() => {
+          document.getElementById("title")?.focus();
+        }, 120);
       }
+    }
 
-      await load();
-      renderFromCache();
-      toast("예시 일정을 넣었어요.");
+    function toggleDay(date) {
+      const el = document.querySelector(`[data-date="${date}"]`);
+      if (!el) return;
+      el.dataset.open = el.dataset.open === "true" ? "false" : "true";
     }
-    function toggleTheme() {
-      const body = document.body;
-      const next = body.dataset.theme === "night" ? "day" : "night";
-      body.dataset.theme = next;
-      localStorage.setItem(THEME_KEY, next);
-    }
+
     async function render() {
       if (isFirstLoad) {
-        const root = document.getElementById("days");
-        root.innerHTML = `<section class="day glass"><div class="empty">일정을 불러오는 중입니다...</div></section>`;
+        document.getElementById("days").innerHTML =
+          `<section class="day panel"><div class="empty">일정을 불러오는 중입니다...</div></section>`;
         await load();
       }
       renderFromCache();
     }
 
     function renderFromCache() {
-      const keyword = document.getElementById("search")?.value.trim().toLowerCase() || "";
-
-      const items = cachedItems
-        .filter(x => !keyword || [x.title, x.memo, x.map].join(" ").toLowerCase().includes(keyword));
-
       const root = document.getElementById("days");
       root.innerHTML = "";
-      for (const [date, label] of DAYS) {
-        const dayItems = items.filter(x => x.date === date);
+
+      for (const [date, label, sub] of DAYS) {
+        const dayItems = cachedItems.filter(x => x.date === date);
         const day = document.createElement("section");
-        day.className = "day glass";
+        day.className = "day panel";
+        day.dataset.date = date;
+        day.dataset.open = dayItems.length ? "true" : "false";
+
         day.innerHTML = `
-      <div class="day-head">
-        <h2>${label}</h2>
-        <span class="count">${dayItems.length}개 일정</span>
-      </div>`;
+          <button class="day-summary" onclick="toggleDay('${date}')">
+            <span class="day-summary-left">
+              <span class="day-title">${label}</span>
+              <span class="day-sub">${sub} · ${dayItems.length}개 일정</span>
+            </span>
+            <span class="chevron">›</span>
+          </button>
+          <div class="items"></div>
+        `;
+
+        const itemsEl = day.querySelector(".items");
+
         if (!dayItems.length) {
-          day.innerHTML += `<div class="empty">아직 일정이 없습니다. 위 입력창에서 장소를 추가해보세요.</div>`;
+          itemsEl.innerHTML = `<div class="empty">아직 일정이 없습니다.</div>`;
         } else {
           for (const item of dayItems) {
-            const div = document.createElement("div");
-            div.className = "item";
+            const row = document.createElement("article");
+            row.className = "item";
+
             const mapValue = String(item.map || "").trim();
             const mapActions = mapValue
-              ? `<a class="button ghost" target="_blank" rel="noopener" href="${mapsUrl(mapValue)}">🗺️ 지도</a>
-                 <button class="ghost" onclick="copyMap('${escapeAttr(mapValue)}')">링크 복사</button>`
-              : `<button class="ghost" disabled title="Google Maps 주소가 없습니다.">지도 없음</button>`;
-            div.innerHTML = `
-          <div class="time-pill">${escapeHtml(displayTimeRange(item))}</div>
-          <div>
-            <div class="title-row">
-              <p class="title">${escapeHtml(item.title)}</p>
-            </div>
-            <div class="meta">${escapeHtml(item.memo || "메모 없음")}</div>
-            <div class="actions">
-              ${mapActions}
-              <button class="secondary" onclick="editItem('${item.id}')">수정</button>
-              <button class="danger" onclick="deleteItem('${item.id}')">삭제</button>
-            </div>
-          </div>`;
-            day.appendChild(div);
+              ? `<a class="action map" target="_blank" rel="noopener" href="${mapsUrl(mapValue)}">지도</a>
+                 <button class="action" onclick="copyMap('${escapeAttr(mapValue)}')">복사</button>`
+              : `<button class="action" disabled title="Google Maps 주소가 없습니다.">지도 없음</button>`;
+
+            row.innerHTML = `
+              <div class="time">${escapeHtml(displayTimeRange(item))}</div>
+              <div>
+                <p class="item-title">${escapeHtml(item.title)}</p>
+                <p class="memo">${escapeHtml(item.memo || "메모 없음")}</p>
+                <div class="actions">
+                  ${mapActions}
+                  <button class="action" onclick="editItem('${escapeAttr(item.id)}')">수정</button>
+                  <button class="action delete" onclick="deleteItem('${escapeAttr(item.id)}')">삭제</button>
+                </div>
+              </div>
+            `;
+            itemsEl.appendChild(row);
           }
         }
+
         root.appendChild(day);
       }
     }
+
     function escapeHtml(str) {
       return String(str).replace(/[&<>"']/g, s => ({
-        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
       }[s]));
     }
+
     function escapeAttr(str) {
       return String(str).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
     }
-    document.body.dataset.theme = localStorage.getItem(THEME_KEY) || "day";
-    //render();
+
     window.addEventListener("DOMContentLoaded", () => {
       render();
     });
   </script>
 </body>
-
 </html>
