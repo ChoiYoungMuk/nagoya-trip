@@ -505,7 +505,7 @@
 
   <main>
     <section class="toolbar glass">
-      <input id="search" placeholder="일정 검색: 나고야성, 맛집, 쇼핑..." oninput="render()" />
+      <input id="search" placeholder="일정 검색: 나고야성, 맛집, 쇼핑..." oninput="renderFromCache()" />
       <button onclick="toggleTheme()">🌙 테마</button>
       <button class="ghost" onclick="exportJson()">백업</button>
       <label class="button secondary" for="importFile">불러오기</label>
@@ -568,11 +568,23 @@
       ["2026-06-22", "6/22 월요일 · 4일차"]
     ];
 
+    let cachedItems = [];
+    let isFirstLoad = true;
+
     async function load() {
-      const res = await fetch(API_URL);
+      const res = await fetch(API_URL, { cache: "no-store" });
       const data = await res.json();
 
-      return data.sort((a, b) =>
+      cachedItems = data.sort((a, b) =>
+        String(a.date + a.time).localeCompare(String(b.date + b.time))
+      );
+
+      isFirstLoad = false;
+      return cachedItems;
+    }
+
+    function sortItems(items) {
+      return items.sort((a, b) =>
         String(a.date + a.time).localeCompare(String(b.date + b.time))
       );
     }
@@ -615,26 +627,51 @@
       // items.push(item);
       // items.sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
       // save(items);
-      await addToServer(item);
-      await render();
+      cachedItems.push(item);
+      sortItems(cachedItems);
+      renderFromCache();
+
       document.getElementById("title").value = "";
       document.getElementById("map").value = "";
       document.getElementById("memo").value = "";
-      toast("일정을 추가했어요.");
+      toast("일정을 추가했어요. 동기화 중...");
+
+      try {
+        await addToServer(item);
+        await load();
+        renderFromCache();
+        toast("Google Sheets에 저장됐어요.");
+      } catch (error) {
+        cachedItems = cachedItems.filter(x => String(x.id) !== String(item.id));
+        renderFromCache();
+        toast("저장 실패. 잠시 후 다시 시도해주세요.");
+      }
     }
     async function deleteItem(id) {
       if (!confirm("이 일정을 삭제할까요?")) return;
 
-      await fetch(API_URL, {
-        method: "POST",
-        body: JSON.stringify({
-          action: "delete",
-          id
-        })
-      });
+      const before = [...cachedItems];
+      cachedItems = cachedItems.filter(x => String(x.id) !== String(id));
+      renderFromCache();
+      toast("삭제했어요. 동기화 중...");
 
-      await render();
-      toast("삭제했어요.");
+      try {
+        await fetch(API_URL, {
+          method: "POST",
+          body: JSON.stringify({
+            action: "delete",
+            id
+          })
+        });
+
+        await load();
+        renderFromCache();
+        toast("Google Sheets에 반영됐어요.");
+      } catch (error) {
+        cachedItems = before;
+        renderFromCache();
+        toast("삭제 실패. 잠시 후 다시 시도해주세요.");
+      }
     }
 
     async function deleteAllFromServer() {
@@ -661,15 +698,27 @@
       document.getElementById("map").value = item.map;
       document.getElementById("memo").value = item.memo;
 
-      await fetch(API_URL, {
-        method: "POST",
-        body: JSON.stringify({
-          action: "delete",
-          id
-        })
-      });
+      const before = [...cachedItems];
+      cachedItems = cachedItems.filter(x => String(x.id) !== String(id));
+      renderFromCache();
 
-      await render();
+      try {
+        await fetch(API_URL, {
+          method: "POST",
+          body: JSON.stringify({
+            action: "delete",
+            id
+          })
+        });
+        await load();
+        renderFromCache();
+      } catch (error) {
+        cachedItems = before;
+        renderFromCache();
+        toast("수정 준비 실패. 다시 시도해주세요.");
+        return;
+      }
+
       window.scrollTo({ top: 0, behavior: "smooth" });
       toast("위 입력창에서 수정 후 다시 추가하세요.");
     }
@@ -710,7 +759,8 @@
             });
           }
 
-          await render();
+          await load();
+          renderFromCache();
           toast("백업을 불러왔어요.");
         } catch {
           toast("JSON 파일 형식이 올바르지 않습니다.");
@@ -721,7 +771,8 @@
     async function resetAll() {
       if (confirm("모든 일정을 삭제할까요?")) {
         await deleteAllFromServer();
-        await render();
+        await load();
+        renderFromCache();
         toast("전체 초기화했어요.");
       }
     }
@@ -743,7 +794,8 @@
         });
       }
 
-      await render();
+      await load();
+      renderFromCache();
       toast("예시 일정을 넣었어요.");
     }
     function toggleTheme() {
@@ -753,9 +805,18 @@
       localStorage.setItem(THEME_KEY, next);
     }
     async function render() {
+      if (isFirstLoad) {
+        const root = document.getElementById("days");
+        root.innerHTML = `<section class="day glass"><div class="empty">일정을 불러오는 중입니다...</div></section>`;
+        await load();
+      }
+      renderFromCache();
+    }
+
+    function renderFromCache() {
       const keyword = document.getElementById("search")?.value.trim().toLowerCase() || "";
 
-      const items = (await load())
+      const items = cachedItems
         .filter(x => !keyword || [x.title, x.memo, x.map].join(" ").toLowerCase().includes(keyword));
 
       const root = document.getElementById("days");
