@@ -61,6 +61,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
+      padding: 0 8px;
     }
 
     .brand h1 {
@@ -100,7 +101,7 @@
 
     .panel {
       background: var(--card);
-      border: 1px solid var(--line);
+      border: 1px solid #dfe3e8;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
@@ -249,9 +250,10 @@
       justify-content: space-between;
       gap: 12px;
       padding: 14px 16px;
-      background: var(--card);
+      background: #f8fafc;
       color: var(--text);
       text-align: left;
+      border-bottom: 1px solid var(--line);
     }
 
     .day-summary-left {
@@ -261,9 +263,22 @@
     }
 
     .day-title {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-size: 16px;
       font-weight: 900;
       letter-spacing: -0.03em;
+    }
+
+    .day-title::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      display: inline-block;
     }
 
     .day-sub {
@@ -284,8 +299,8 @@
 
     .items {
       display: none;
-      padding: 0 12px 12px;
-      background: var(--card);
+      padding: 10px 12px 12px;
+      background: #ffffff;
     }
 
     .day[data-open="true"] .items {
@@ -296,8 +311,15 @@
       display: grid;
       grid-template-columns: 118px 1fr;
       gap: 12px;
-      padding: 13px 0;
-      border-top: 1px solid var(--line);
+      padding: 13px;
+      margin-bottom: 9px;
+      border: 1px solid #edf0f3;
+      border-radius: 14px;
+      background: #ffffff;
+    }
+
+    .item:last-child {
+      margin-bottom: 0;
     }
 
     .time {
@@ -370,7 +392,6 @@
       padding: 14px 4px 2px;
       color: var(--muted);
       font-size: 14px;
-      border-top: 1px solid var(--line);
     }
 
     .toast {
@@ -403,7 +424,11 @@
 
       .topbar {
         margin: -12px -10px 10px;
-        padding: 12px 10px;
+        padding: 12px 14px;
+      }
+
+      .topbar-inner {
+        padding: 0 6px;
       }
 
       .brand h1 {
@@ -431,7 +456,7 @@
       .item {
         grid-template-columns: 1fr;
         gap: 8px;
-        padding: 12px 0;
+        padding: 12px;
       }
 
       .time {
