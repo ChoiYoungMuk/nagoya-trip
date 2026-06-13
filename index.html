@@ -265,6 +265,10 @@
       font-weight: 800;
     }
 
+    .field.memo textarea {
+      min-height: 56px;
+    }
+
     input, select, textarea {
       display: block;
       width: 100%;
@@ -277,9 +281,10 @@
     }
 
     textarea {
-      min-height: 84px;
+      min-height: 56px;
       resize: vertical;
       display: block;
+      line-height: 1.45;
     }
 
     input:focus, select:focus, textarea:focus {
@@ -559,6 +564,10 @@
 
       .actions {
         gap: 6px;
+      }
+
+      .field.memo textarea {
+        min-height: 54px;
       }
 
       .action {
