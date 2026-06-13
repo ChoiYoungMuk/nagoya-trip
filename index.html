@@ -7,19 +7,19 @@
   <title>나고야 가족여행 | 2026.06.19 - 06.22</title>
   <style>
     :root {
-      --bg: #f8fafc;
-      --bg2: #eef2f7;
-      --card: rgba(255, 255, 255, .92);
-      --text: #1f2937;
-      --muted: #667085;
-      --line: rgba(148, 163, 184, .35);
-      --accent: #334155;
-      --accent2: #64748b;
-      --blue: #2563eb;
-      --green: #059669;
-      --danger: #dc2626;
-      --shadow: 0 10px 28px rgba(15, 23, 42, .08);
-      --radius: 18px;
+      --bg: #f4f6f8;
+      --bg2: #ffffff;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #bdd600;
+      --accent2: #9bc700;
+      --blue: #172a55;
+      --green: #bdd600;
+      --danger: #ef4444;
+      --shadow: 0 8px 24px rgba(17, 24, 39, .08);
+      --radius: 16px;
     }
 
     [data-theme="night"] {
@@ -49,76 +49,75 @@
       margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       color: var(--text);
-      background: linear-gradient(180deg, var(--bg), var(--bg2));
+      background: var(--bg);
       min-height: 100vh;
     }
 
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 20px 14px 12px;
+      padding: 0 14px 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #ffffff 50%, #172a55 50%, #172a55 100%);
+      border-bottom: 1px solid #e5e7eb;
     }
 
     .hero-inner {
-      max-width: 1120px;
+      max-width: 1040px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 18px;
+      gap: 14px;
       align-items: center;
+      padding-top: 18px;
     }
 
     .glass {
       background: var(--card);
-      backdrop-filter: blur(16px);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
 
     .hero-copy {
-      padding: 20px;
+      padding: 22px 22px 20px;
+      border-top: 5px solid var(--accent);
     }
 
     .eyebrow {
       display: inline-flex;
       gap: 8px;
       align-items: center;
-      padding: 8px 12px;
+      padding: 7px 12px;
       border-radius: 999px;
-      background: rgba(225, 29, 72, .10);
-      color: var(--accent);
+      background: #eef7c6;
+      color: #4b5f00;
       font-weight: 800;
-      font-size: 13px;
+      font-size: 12px;
       margin-bottom: 14px;
+      letter-spacing: .02em;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(28px, 7vw, 42px);
-      line-height: 1;
-      letter-spacing: -0.05em;
+      font-size: clamp(30px, 6vw, 46px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
     }
 
     .hero-copy p {
       color: var(--muted);
-      font-size: 15px;
-      line-height: 1.55;
-      margin: 12px 0 0;
+      font-size: 17px;
+      line-height: 1.65;
+      margin: 16px 0 0;
     }
 
     .hero-art {
-      min-height: 190px;
-      display: grid;
-      place-items: center;
-      padding: 18px;
-      position: relative;
-      overflow: hidden;
+      display: none;
     }
 
     .hero-art svg {
       width: 100%;
-      max-width: 300px;
+      max-width: 460px;
       filter: drop-shadow(0 22px 28px rgba(120, 53, 15, .18));
     }
 
@@ -140,9 +139,9 @@
     }
 
     main {
-      max-width: 1120px;
+      max-width: 1040px;
       margin: 0 auto;
-      padding: 0 14px 28px;
+      padding: 18px 14px 34px;
     }
 
     .toolbar {
@@ -154,10 +153,10 @@
     textarea {
       width: 100%;
       border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 12px 13px;
+      border-radius: 8px;
+      padding: 12px 12px;
       font: inherit;
-      background: rgba(255, 255, 255, .82);
+      background: #ffffff;
       color: #111827;
       outline: none;
     }
@@ -169,19 +168,19 @@
     input:focus,
     select:focus,
     textarea:focus {
-      border-color: rgba(225, 29, 72, .55);
-      box-shadow: 0 0 0 4px rgba(225, 29, 72, .10);
+      border-color: #bdd600;
+      box-shadow: 0 0 0 3px rgba(189, 214, 0, .18);
     }
 
     button,
     .button {
       border: 0;
-      background: #334155;
+      background: #172a55;
       color: white;
       padding: 12px 14px;
-      border-radius: 14px;
+      border-radius: 8px;
       cursor: pointer;
-      font-weight: 900;
+      font-weight: 800;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
@@ -199,8 +198,8 @@
 
     button.ghost,
     .button.ghost {
-      background: rgba(37, 99, 235, .10);
-      color: var(--blue);
+      background: #eef2f7;
+      color: #172a55;
       box-shadow: none;
     }
 
@@ -210,7 +209,7 @@
     }
 
     button.ok {
-      background: #0f766e;
+      background: #bdd600; color: #172a55;
     }
 
     button:disabled {
@@ -220,18 +219,19 @@
     }
 
     .form {
-      padding: 14px;
+      padding: 16px;
       display: grid;
-      grid-template-columns: 120px 110px 110px 1fr 1fr;
+      grid-template-columns: 130px 120px 120px 1fr 1fr;
       gap: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      border-top: 5px solid #172a55;
     }
 
     label {
       display: block;
       font-size: 12px;
-      color: var(--muted);
-      font-weight: 900;
+      color: #172a55;
+      font-weight: 800;
       margin-bottom: 6px;
     }
 
@@ -251,36 +251,37 @@
     }
 
     .day-head {
-      padding: 14px;
+      padding: 13px 16px;
       border-bottom: 1px solid var(--line);
       display: flex;
       justify-content: space-between;
       gap: 10px;
       align-items: center;
-      background: linear-gradient(135deg, rgba(255, 255, 255, .38), rgba(255, 255, 255, .08));
+      background: #ffffff;
     }
 
     .day h2 {
       margin: 0;
-      font-size: 19px;
+      font-size: 17px;
       letter-spacing: -.02em;
+      color: #172a55;
     }
 
     .count {
       font-size: 12px;
-      color: var(--muted);
-      font-weight: 900;
-      border: 1px solid var(--line);
+      color: #4b5f00;
+      font-weight: 800;
+      background: #eef7c6;
       border-radius: 999px;
-      padding: 6px 9px;
+      padding: 5px 9px;
     }
 
     .item {
       position: relative;
       display: grid;
-      grid-template-columns: 150px 1fr;
+      grid-template-columns: 132px 1fr;
       gap: 10px;
-      padding: 12px 14px;
+      padding: 13px 16px;
       border-bottom: 1px solid var(--line);
     }
 
@@ -290,17 +291,17 @@
 
     .time-pill {
       align-self: start;
-      width: 136px;
-      min-width: 136px;
-      max-width: 136px;
-      border-radius: 12px;
-      padding: 9px 8px;
+      width: 118px;
+      min-width: 118px;
+      max-width: 118px;
+      border-radius: 8px;
+      padding: 9px 7px;
       text-align: center;
       font-weight: 800;
-      color: #334155;
-      background: #f1f5f9;
-      border: 1px solid rgba(148, 163, 184, .45);
-      font-size: 13px;
+      color: #172a55;
+      background: #eef7c6;
+      border: 1px solid #d7e889;
+      font-size: 12px;
       line-height: 1.2;
       letter-spacing: .1px;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
@@ -332,7 +333,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 7px;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     .actions button,
@@ -350,7 +351,7 @@
 
     .tips {
       margin-top: 16px;
-      padding: 14px;
+      padding: 16px;
       color: var(--muted);
       line-height: 1.6;
       font-size: 14px;
@@ -386,11 +387,22 @@
     }
 
     @media (max-width: 860px) {
-      .hero-art { display: none; }
-
       .hero-inner {
         grid-template-columns: 1fr;
       }
+
+      .hero-art {
+        display: none;
+      }
+
+      .form {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .days {
+        grid-template-columns: 1fr;
+      }
+    }
 
       .hero-art {
         min-height: 250px;
@@ -415,8 +427,45 @@
 
     @media (max-width: 520px) {
       .hero {
-        padding-top: 18px;
+        padding: 0 10px 14px;
       }
+
+      .hero-copy {
+        padding: 18px 16px;
+      }
+
+      .form {
+        grid-template-columns: 1fr 1fr;
+        padding: 12px;
+      }
+
+      .full {
+        grid-column: 1 / -1;
+      }
+
+      .item {
+        grid-template-columns: 112px 1fr;
+        padding: 12px;
+      }
+
+      .time-pill {
+        width: 100px;
+        min-width: 100px;
+        max-width: 100px;
+        font-size: 11px;
+        padding: 8px 6px;
+      }
+
+      .actions button,
+      .actions .button {
+        width: auto;
+      }
+
+      button,
+      .button {
+        width: 100%;
+      }
+    }
 
       .hero-copy {
         padding: 20px;
@@ -431,7 +480,7 @@
       }
 
       .item {
-        grid-template-columns: 150px 1fr;
+        grid-template-columns: 132px 1fr;
         padding: 14px;
       }
 
@@ -448,8 +497,16 @@
 
     @media (max-width: 380px) {
       .item {
-        grid-template-columns: 138px 1fr;
+        grid-template-columns: 104px 1fr;
       }
+
+      .time-pill {
+        width: 94px;
+        min-width: 94px;
+        max-width: 94px;
+        font-size: 10px;
+      }
+    }
 
       .time-pill {
         width: 124px;
@@ -465,10 +522,14 @@
 
 <body data-theme="day">
   <section class="hero">
+    <div style="max-width:1040px;margin:0 auto;padding:12px 2px 8px;display:flex;align-items:center;justify-content:space-between;color:#172a55;font-weight:900;">
+      <div style="display:flex;align-items:center;gap:8px;"><span style="width:18px;height:18px;border-radius:50%;background:#bdd600;display:inline-block;"></span> 나고야 가족여행</div>
+      <div style="font-size:12px;color:#6b7280;font-weight:800;">2026.06.19 - 06.22</div>
+    </div>
     <div class="hero-inner">
       <div class="hero-copy glass">
-        <div class="eyebrow">🍤 Nagoya Family Trip</div>
-        <h1>나고야<br />3박 4일 여행</h1>
+        <div class="eyebrow">Nagoya Family Trip</div>
+        <h1>나고야<br />가족여행</h1>
         <p>가족과 함께 보는 일정표. 장소를 추가하고, 구글맵 주소나 검색어를 넣으면 바로 지도 버튼으로 연결됩니다.</p>
         <div class="chip-row">
           <span class="chip">2026.06.19 - 06.22</span>
@@ -554,8 +615,6 @@
       </div>
       <div class="full" style="display:flex; gap:10px; flex-wrap:wrap;">
         <button class="ok" onclick="addItem()">＋ 일정 추가</button>
-        <button class="ghost" onclick="seedSample()">나고야 예시 일정 넣기</button>
-        <button class="danger" onclick="resetAll()">전체 초기화</button>
       </div>
     </section>
 
@@ -794,14 +853,6 @@
         }
       };
       reader.readAsText(file);
-    }
-    async function resetAll() {
-      if (confirm("모든 일정을 삭제할까요?")) {
-        await deleteAllFromServer();
-        await load();
-        renderFromCache();
-        toast("전체 초기화했어요.");
-      }
     }
     async function seedSample() {
       const sample = [
