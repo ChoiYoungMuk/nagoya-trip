@@ -253,6 +253,7 @@
     .field.full,
     .field.place,
     .field.map,
+    .field.blog,
     .field.memo {
       grid-column: 1 / -1;
     }
@@ -546,6 +547,7 @@
       .field:first-child,
       .field.place,
       .field.map,
+      .field.blog,
       .field.memo {
         grid-column: 1 / -1;
       }
@@ -645,6 +647,11 @@
           <input id="map" placeholder="선택 입력" />
         </div>
 
+        <div class="field blog">
+          <label for="blog">블로그 URL</label>
+          <input id="blog" placeholder="선택 입력" />
+        </div>
+
         <div class="field memo">
           <label for="memo">메모</label>
           <textarea id="memo" placeholder="예약번호, 이동수단, 식사 후보 등을 적어두세요."></textarea>
@@ -709,6 +716,7 @@
         endTime: normalizeTime(item.endTime || ""),
         title: String(item.title || ""),
         map: String(item.map || ""),
+        blog: String(item.blog || item.blogUrl || ""),
         memo: String(item.memo || "")
       };
     }
@@ -733,6 +741,13 @@
       return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(text);
     }
 
+    function normalUrl(value) {
+      const text = String(value || "").trim();
+      if (!text) return "";
+      if (text.startsWith("http://") || text.startsWith("https://")) return text;
+      return "https://" + text;
+    }
+
     async function addToServer(item) {
       await fetch(API_URL, {
         method: "POST",
@@ -748,6 +763,7 @@
         endTime: document.getElementById("endTime").value || "",
         title: document.getElementById("title").value.trim(),
         map: document.getElementById("map").value.trim(),
+        blog: document.getElementById("blog").value.trim(),
         memo: document.getElementById("memo").value.trim()
       };
 
@@ -768,6 +784,7 @@
       document.getElementById("endTime").value = "";
       document.getElementById("title").value = "";
       document.getElementById("map").value = "";
+      document.getElementById("blog").value = "";
       document.getElementById("memo").value = "";
 
       toast("일정을 추가했어요. 동기화 중...");
@@ -824,6 +841,7 @@
       document.getElementById("endTime").value = item.endTime || "";
       document.getElementById("title").value = item.title;
       document.getElementById("map").value = item.map;
+      document.getElementById("blog").value = item.blog || "";
       document.getElementById("memo").value = item.memo;
 
       const before = [...cachedItems];
@@ -849,15 +867,6 @@
         setSync("동기화 확인 필요", false);
         toast("수정 준비 실패. 다시 시도해주세요.");
       }
-    }
-
-    function copyMap(value) {
-      const url = mapsUrl(value);
-      if (!url) {
-        toast("지도 주소가 없습니다.");
-        return;
-      }
-      navigator.clipboard.writeText(url).then(() => toast("지도 링크를 복사했어요."));
     }
 
     function toggleForm(force) {
@@ -926,10 +935,13 @@
             row.className = "item";
 
             const mapValue = String(item.map || "").trim();
+            const blogValue = String(item.blog || "").trim();
             const mapActions = mapValue
-              ? `<a class="action map" target="_blank" rel="noopener" href="${mapsUrl(mapValue)}">지도</a>
-                 <button class="action" onclick="copyMap('${escapeAttr(mapValue)}')">복사</button>`
+              ? `<a class="action map" target="_blank" rel="noopener" href="${mapsUrl(mapValue)}">지도</a>`
               : `<button class="action" disabled title="Google Maps 주소가 없습니다.">지도 없음</button>`;
+            const blogAction = blogValue
+              ? `<a class="action" target="_blank" rel="noopener" href="${normalUrl(blogValue)}">블로그</a>`
+              : `<button class="action" disabled title="블로그 URL이 없습니다.">블로그 없음</button>`;
 
             row.innerHTML = `
               <div class="time">${escapeHtml(displayTimeRange(item))}</div>
@@ -938,6 +950,7 @@
                 <p class="memo">${escapeHtml(item.memo || "메모 없음")}</p>
                 <div class="actions">
                   ${mapActions}
+                  ${blogAction}
                   <button class="action" onclick="editItem('${escapeAttr(item.id)}')">수정</button>
                   <button class="action delete" onclick="deleteItem('${escapeAttr(item.id)}')">삭제</button>
                 </div>
