@@ -98,13 +98,6 @@
       box-shadow: 0 8px 18px rgba(37, 99, 235, .12);
     }
 
-    .plane-emoji {
-      display: inline-block;
-      font-size: 24px;
-      line-height: 1;
-      transform: rotate(-8deg);
-    }
-
     .route-dot {
       color: var(--accent);
       font-weight: 900;
@@ -464,6 +457,27 @@
     }
 
 
+
+    .nephew-button {
+      padding: 2px;
+      overflow: hidden;
+      background: #ffffff;
+      border: 2px solid #dbeafe;
+    }
+
+    .nephew-icon {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 13px;
+      object-fit: cover;
+      object-position: center 28%;
+    }
+
+    .nephew-button:hover {
+      box-shadow: 0 10px 22px rgba(37, 99, 235, .18);
+    }
+
     .plane-button {
       border: 0;
       cursor: pointer;
@@ -566,11 +580,7 @@
         border-radius: 13px;
       }
 
-      .plane-emoji {
-        font-size: 22px;
-      }
-
-      .right-status {
+        .right-status {
         flex-direction: column;
         align-items: flex-end;
         gap: 5px;
@@ -638,8 +648,8 @@
   <div class="topbar">
     <div class="topbar-inner">
       <div class="brand travel-brand">
-        <button class="plane-badge plane-button" type="button" onclick="showTravelPhoto()" aria-label="여행 사진 보기">
-          <span class="plane-emoji">✈</span>
+        <button class="plane-badge plane-button nephew-button" type="button" onclick="showTravelPhoto()" aria-label="여행 사진 보기">
+          <img class="nephew-icon" src="./images/nephew-icon.jpg" alt="조카 사진" />
         </button>
         <div>
           <h1>나고야 가족여행</h1>
@@ -1069,7 +1079,6 @@
       // 나중에 사진을 추가할 때는 아래처럼 images 폴더에 넣고 배열에 추가하면 됩니다.
       // { src: "./images/nagoya-castle-02.jpg", title: "나고야", sub: "여행 사진" },
       // { src: "./images/nephew-01.jpg", title: "우리 조카", sub: "여행의 귀여운 주인공" },
-      // { src: "./images/nephew-02.jpg", title: "우리 조카", sub: "랜덤으로 등장!" },
     ];
 
     let photoTimer = null;
