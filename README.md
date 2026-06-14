@@ -1,36 +1,20 @@
-# 나고야 가족여행 GitHub Pages 버전
+# 나고야 가족여행 사이트
 
-## 파일 구성
+## 이미지 이스터에그
 
-- `index.html` 하나만 있으면 동작합니다.
-- 외부 DB/서버가 필요 없습니다.
-- 일정 데이터는 방문자 각자의 브라우저 localStorage에 저장됩니다.
+비행기 아이콘을 클릭하면 `images` 폴더 안의 사진 중 하나가 랜덤으로 나타납니다.
 
-## GitHub Pages 배포
+현재 테스트 이미지:
 
-1. 이 폴더의 `index.html`을 repository 루트에 업로드
-2. GitHub repository에서 `Settings`
-3. 왼쪽 메뉴 `Pages`
-4. `Build and deployment`
-5. Source: `Deploy from a branch`
-6. Branch: `main`
-7. Folder: `/root`
-8. Save
+- images/nagoya-castle-01.jpg
 
-잠시 후 아래 형태의 주소가 생깁니다.
+나중에 사진을 추가하려면:
 
-```text
-https://계정명.github.io/repository명/
+1. images 폴더에 사진 추가
+2. index.html의 `TRAVEL_PHOTOS` 배열에 아래처럼 추가
+
+```javascript
+{ src: "./images/nephew-01.jpg", title: "우리 조카", sub: "여행의 귀여운 주인공" }
 ```
 
-## 주의
-
-정적 웹사이트이므로 모두가 같은 데이터를 실시간으로 공유하지는 않습니다.
-가족 A가 추가한 일정은 가족 A의 브라우저에만 저장됩니다.
-
-공통 수정본이 필요하면 다음 중 하나로 확장하세요.
-
-- Google Sheets 연동
-- Firebase
-- Supabase
-- Flask + SQLite 서버
+파일명은 영문/숫자/하이픈 추천.

@@ -463,6 +463,80 @@
       font-size: 14px;
     }
 
+
+    .plane-button {
+      border: 0;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .plane-button:active {
+      transform: scale(.96);
+    }
+
+    .travel-photo-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(17, 24, 39, .36);
+      backdrop-filter: blur(7px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .35s ease;
+    }
+
+    .travel-photo-layer.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .travel-photo-card {
+      width: min(360px, 86vw);
+      overflow: hidden;
+      border-radius: 26px;
+      background: #ffffff;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, .24);
+      transform: translateY(16px) scale(.94);
+      opacity: 0;
+      transition: transform .45s cubic-bezier(.2, .9, .2, 1), opacity .35s ease;
+    }
+
+    .travel-photo-layer.show .travel-photo-card {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .travel-photo-card img {
+      display: block;
+      width: 100%;
+      height: min(430px, 62vh);
+      object-fit: cover;
+      background: #f3f4f6;
+    }
+
+    .travel-photo-caption {
+      padding: 13px 15px 15px;
+      text-align: center;
+    }
+
+    .travel-photo-caption strong {
+      display: block;
+      font-size: 16px;
+      letter-spacing: -.03em;
+      color: var(--text);
+    }
+
+    .travel-photo-caption span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
     .toast {
       position: fixed;
       left: 50%;
@@ -584,9 +658,9 @@
   <div class="topbar">
     <div class="topbar-inner">
       <div class="brand travel-brand">
-        <div class="plane-badge" aria-hidden="true">
+        <button class="plane-badge plane-button" type="button" onclick="showTravelPhoto()" aria-label="여행 사진 보기">
           <span class="plane-emoji">✈</span>
-        </div>
+        </button>
         <div>
           <h1>나고야 가족여행</h1>
           <p>인천 <span class="route-dot">→</span> 나고야 · 2026.06.19 ~ 06.22</p>
@@ -663,6 +737,17 @@
 
     <section class="days" id="days"></section>
   </main>
+
+
+  <div id="travelPhotoLayer" class="travel-photo-layer" onclick="hideTravelPhoto()">
+    <div class="travel-photo-card" onclick="event.stopPropagation()">
+      <img id="travelPhotoImage" src="./images/nagoya-castle-01.jpg" alt="여행 사진" />
+      <div class="travel-photo-caption">
+        <strong id="travelPhotoTitle">나고야 가족여행</strong>
+        <span id="travelPhotoSub">비행기 아이콘을 누르면 랜덤 사진이 나와요</span>
+      </div>
+    </div>
+  </div>
 
   <div id="toast" class="toast"></div>
 
@@ -994,6 +1079,62 @@
       } else {
         badge.textContent = "여행 중";
       }
+    }
+
+
+    const TRAVEL_PHOTOS = [
+      {
+        src: "./images/nagoya-castle-01.jpg",
+        title: "나고야성",
+        sub: "인천에서 나고야까지, 가족여행 시작!"
+      }
+
+      // 나중에 사진을 추가할 때는 아래처럼 images 폴더에 넣고 배열에 추가하면 됩니다.
+      // { src: "./images/nagoya-castle-02.jpg", title: "나고야", sub: "여행 사진" },
+      // { src: "./images/nephew-01.jpg", title: "우리 조카", sub: "여행의 귀여운 주인공" },
+      // { src: "./images/nephew-02.jpg", title: "우리 조카", sub: "랜덤으로 등장!" },
+    ];
+
+    let photoTimer = null;
+    let lastPhotoIndex = -1;
+
+    function pickRandomPhoto() {
+      if (TRAVEL_PHOTOS.length === 1) return TRAVEL_PHOTOS[0];
+
+      let index = Math.floor(Math.random() * TRAVEL_PHOTOS.length);
+      if (index === lastPhotoIndex) {
+        index = (index + 1) % TRAVEL_PHOTOS.length;
+      }
+      lastPhotoIndex = index;
+      return TRAVEL_PHOTOS[index];
+    }
+
+    function showTravelPhoto() {
+      const photo = pickRandomPhoto();
+      const layer = document.getElementById("travelPhotoLayer");
+      const image = document.getElementById("travelPhotoImage");
+      const title = document.getElementById("travelPhotoTitle");
+      const sub = document.getElementById("travelPhotoSub");
+
+      if (!layer || !image || !title || !sub) return;
+
+      image.src = photo.src;
+      title.textContent = photo.title;
+      sub.textContent = photo.sub;
+
+      clearTimeout(photoTimer);
+      layer.classList.add("show");
+
+      photoTimer = setTimeout(() => {
+        hideTravelPhoto();
+      }, 2600);
+    }
+
+    function hideTravelPhoto() {
+      const layer = document.getElementById("travelPhotoLayer");
+      if (!layer) return;
+      layer.classList.remove("show");
+      clearTimeout(photoTimer);
     }
 
     window.addEventListener("DOMContentLoaded", () => {
