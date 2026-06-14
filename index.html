@@ -508,7 +508,7 @@
     }
 
     .travel-photo-card {
-      width: min(360px, 86vw);
+      width: min(390px, 88vw);
       overflow: hidden;
       border-radius: 26px;
       background: #ffffff;
@@ -526,9 +526,66 @@
     .travel-photo-card img {
       display: block;
       width: 100%;
-      height: min(460px, 68vh);
+      height: min(540px, 72vh);
       object-fit: cover;
+      object-position: center 35%;
       background: #f3f4f6;
+    }
+
+
+    .travel-photo-card {
+      position: relative;
+    }
+
+    .travel-photo-message {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 30px 16px 24px;
+      text-align: center;
+      font-size: clamp(28px, 8vw, 42px);
+      font-weight: 1000;
+      letter-spacing: -0.06em;
+      color: #ec6f9a;
+      text-shadow: 0 2px 0 rgba(255, 255, 255, .96), 0 8px 24px rgba(236, 111, 154, .26);
+      background: linear-gradient(to top, rgba(255,255,255,.98), rgba(255,255,255,.74) 56%, rgba(255,255,255,0));
+      pointer-events: none;
+    }
+
+    .travel-photo-message::before,
+    .travel-photo-message::after {
+      content: "♥";
+      display: inline-block;
+      margin: 0 10px;
+      color: #f4729b;
+      font-size: .72em;
+      transform: translateY(-2px);
+    }
+
+    .petal {
+      position: absolute;
+      z-index: 2;
+      opacity: 0;
+      pointer-events: none;
+      filter: drop-shadow(0 5px 8px rgba(236, 111, 154, .28));
+      animation: petalFloat 2.5s ease-in-out infinite;
+    }
+
+    .travel-photo-layer.show .petal {
+      opacity: .88;
+    }
+
+    .petal-1 { top: 10%; left: 8%; animation-delay: 0s; font-size: 20px; }
+    .petal-2 { top: 18%; right: 10%; animation-delay: .45s; font-size: 17px; }
+    .petal-3 { bottom: 28%; left: 11%; animation-delay: .85s; font-size: 18px; }
+    .petal-4 { bottom: 34%; right: 8%; animation-delay: 1.2s; font-size: 21px; }
+
+    @keyframes petalFloat {
+      0% { transform: translate3d(0, -8px, 0) rotate(-12deg) scale(.88); opacity: 0; }
+      18% { opacity: .9; }
+      55% { transform: translate3d(10px, 14px, 0) rotate(16deg) scale(1); opacity: .92; }
+      100% { transform: translate3d(-8px, 34px, 0) rotate(35deg) scale(.82); opacity: 0; }
     }
 
     .toast {
@@ -731,8 +788,12 @@
 
   <div id="travelPhotoLayer" class="travel-photo-layer" onclick="hideTravelPhoto()">
     <div class="travel-photo-card" onclick="event.stopPropagation()">
-      <img id="travelPhotoImage" src="./images/nagoya-castle-01.jpg" alt="여행 사진" />
-
+      <img id="travelPhotoImage" src="./images/nephew-popup-01.jpg" alt="조카 여행 사진" />
+      <div class="petal petal-1">🌸</div>
+      <div class="petal petal-2">🌸</div>
+      <div class="petal petal-3">🌸</div>
+      <div class="petal petal-4">🌸</div>
+      <div class="travel-photo-message">우리 나고야 갈래?</div>
     </div>
   </div>
 
@@ -1071,14 +1132,12 @@
 
     const TRAVEL_PHOTOS = [
       {
-        src: "./images/nagoya-castle-01.jpg",
-        title: "나고야성",
-        sub: "인천에서 나고야까지, 가족여행 시작!"
+        src: "./images/nephew-popup-01.jpg"
       }
 
       // 나중에 사진을 추가할 때는 아래처럼 images 폴더에 넣고 배열에 추가하면 됩니다.
-      // { src: "./images/nagoya-castle-02.jpg", title: "나고야", sub: "여행 사진" },
-      // { src: "./images/nephew-01.jpg", title: "우리 조카", sub: "여행의 귀여운 주인공" },
+      // { src: "./images/nagoya-castle-01.jpg" },
+      // { src: "./images/nephew-02.jpg" },
     ];
 
     let photoTimer = null;
@@ -1109,7 +1168,7 @@
 
       photoTimer = setTimeout(() => {
         hideTravelPhoto();
-      }, 2600);
+      }, 3200);
     }
 
     function hideTravelPhoto() {
