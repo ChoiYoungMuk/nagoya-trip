@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -19,7 +20,9 @@
       --radius: 18px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -28,7 +31,10 @@
       color: var(--text);
     }
 
-    button, input, select, textarea {
+    button,
+    input,
+    select,
+    textarea {
       font: inherit;
     }
 
@@ -270,7 +276,9 @@
       min-height: 56px;
     }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       display: block;
       width: 100%;
       border: 1px solid var(--line);
@@ -288,7 +296,9 @@
       line-height: 1.45;
     }
 
-    input:focus, select:focus, textarea:focus {
+    input:focus,
+    select:focus,
+    textarea:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 4px rgba(37, 99, 235, .10);
     }
@@ -517,10 +527,10 @@
       background: #f3f4f6;
     }
 
-    .travel-photo-caption {
+    /* .travel-photo-caption {
       padding: 13px 15px 15px;
       text-align: center;
-    }
+    } */
 
     .travel-photo-caption strong {
       display: block;
@@ -742,10 +752,10 @@
   <div id="travelPhotoLayer" class="travel-photo-layer" onclick="hideTravelPhoto()">
     <div class="travel-photo-card" onclick="event.stopPropagation()">
       <img id="travelPhotoImage" src="./images/nagoya-castle-01.jpg" alt="여행 사진" />
-      <div class="travel-photo-caption">
+      <!-- <div class="travel-photo-caption">
         <strong id="travelPhotoTitle">나고야 가족여행</strong>
         <span id="travelPhotoSub">비행기 아이콘을 누르면 랜덤 사진이 나와요</span>
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -1143,4 +1153,5 @@
     });
   </script>
 </body>
+
 </html>
